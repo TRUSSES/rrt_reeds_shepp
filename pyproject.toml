@@ -6,5 +6,4 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "numpy>=2.2.6",
-    "ompl>=2.0.0",
 ]
