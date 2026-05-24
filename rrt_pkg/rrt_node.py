@@ -30,7 +30,7 @@ class Grid:
         row = int((y - self.origin[1]) / self.resolution)
         if row < 0 or row >= self.grid.shape[0]:
             return False
-        if col < 0 or row >= self.grid.shape[1]:
+        if col < 0 or col >= self.grid.shape[1]:
             return False
         return self.grid[row, col] == 0
 
@@ -82,7 +82,16 @@ class RRTNode(Node):
         self.path_pub = self.create_publisher(Path, "rrt_path", 10)
 
     def map_callback(self, msg: OccupancyGrid):
-        self.occ_grid = msg
+        grid = np.reshape(msg.data, (msg.info.height, msg.info.width))
+        origin = [msg.info.origin.position.x, msg.info.origin.position.y]
+        bounds = [
+            origin[0],
+            origin[0] + msg.info.width * msg.info.resolution,
+            origin[1],
+            origin[1] + msg.info.height * msg.info.resolution,
+        ]
+        self.occ_grid = Grid(grid, msg.info.resolution, origin)
+        self.bounds = bounds
 
     def pose_callback(self, msg: PoseStamped):
         self.pose_current = msg
