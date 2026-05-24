@@ -13,7 +13,7 @@ from ompl import util as ou
 
 GRID_SIZE = 100
 RESOLUTION = 0.1
-TURNING_RADIUS = 0.5
+TURNING_RADIUS = 1.5
 OBSTACLES = [
     [2.0, 2.0, 0.5],
     [5.0, 5.0, 1.0],
@@ -95,7 +95,7 @@ def plan(grid):
 
 
 def plot(grid, paths):
-    fig, axes = plt.subplots(1, 5)
+    fig, axes = plt.subplots(1, 5, sharey=True)
     for i, (ax, path) in enumerate(zip(axes, paths)):
         ax.imshow(grid, origin="lower", extent=[0, 10, 0, 10], cmap="gray_r")
         if path:
@@ -103,13 +103,14 @@ def plot(grid, paths):
             ax.plot(xs, ys, "b-")
             ax.plot(xs[0], ys[0], "go")
             ax.plot(xs[-1], ys[-1], "ro")
+    fig.savefig("planner_trajs.png", bbox_inches="tight")
     plt.show()
 
 
 if __name__ == "__main__":
     grid = make_grid()
     paths = []
-    for seed in range(5):
+    for seed in [1, 4, 7, 10, 13]:
         ou.RNG.setSeed(seed)
         paths.append(plan(grid))
     plot(grid, paths)
