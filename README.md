@@ -1,7 +1,7 @@
 # RRT w/ Reeds-Shepp State Space
 *Benjamin Aziel*
 
-![Sample trajectories](planner_trajs.pdf)
+![Sample trajectories](planner_trajs.png)
 
 Python dependencies are managed with [uv](https://docs.astral.sh/uv/). Install it if you don't have it:
 
