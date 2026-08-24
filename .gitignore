@@ -1,0 +1,10 @@
+build/
+devel/
+install/
+*.pyc
+__pycache__/
+.vscode/
+*.log
+*.egg-info
+dist/
+*.so

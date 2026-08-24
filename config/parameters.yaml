@@ -1,0 +1,39 @@
+rrt_node:
+  ros__parameters:
+    turning_radius: 0.5
+    planning_timeout: 5.0
+    planner_type: rrt_connect
+    collision_check_step: 0.05
+
+    occupancy_threshold: 50
+    unknown_is_occupied: true
+
+    # risk_mapping ExtrapolatedMap input. Values below the threshold are blocked.
+    risk_map_topic: extrapolated_map
+    traversability_threshold: 0.0
+
+    # point: only the vehicle center; circle: robot_radius; rectangle: length/width
+    footprint_type: rectangle
+    robot_radius: 0.25
+    vehicle_length: 0.7
+    vehicle_width: 0.45
+    # Extra clearance added to obstacles for every footprint type.
+    safety_margin: 0.05
+
+# Offline risk-map benchmark settings. Keep width * resolution and
+# height * resolution large enough to contain the configured start and goal.
+risk_benchmark:
+  grid_width: 50
+  grid_height: 50
+  grid_resolution: 0.2
+
+  overall_score:
+    distance_weight: 0.25
+    time_weight: 0.35
+    uncertainty_weight: 0.30
+    reverse_weight: 0.10
+    distance_scale: 10.0
+    time_scale: 10.0
+    uncertainty_scale: 5.0
+    reverse_scale: 5.0
+    gear_switch_penalty: 0.5
